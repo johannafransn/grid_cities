@@ -2,9 +2,12 @@ import cities from "@/config/cities";
 import { useParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import ApiService from "../ApiService";
+import { TCity } from "../types/types";
 
 export function useGetCityData() {
   const [city, setCity] = useState<TCity | null>(null);
+  const [weather, setWeather] = useState<any | null>(null);
+
   const [loading, setLoading] = useState<boolean>(false);
   let { id: cityName } = useParams();
 
@@ -19,8 +22,8 @@ export function useGetCityData() {
           );
           if (foundCity) {
             const { lng, lat } = foundCity.coords;
-            const weather = await ApiService.getWeatherData(lng, lat);
-            //https://api.openweathermap.org/data/2.5/onecall?lon=[lon]&lat=[lat]&units=metric&appid=[ api-key]`
+            const weather = await ApiService.getWeatherData(foundCity.name);
+            setWeather(weather);
             setCity(foundCity);
           } else {
             //TODO handle error here
@@ -36,7 +39,7 @@ export function useGetCityData() {
     fetchData();
   }, [city, cityName]);
 
-  return { city, loading, setCity };
+  return { city, loading, setCity, weather };
 }
 
 export default useGetCityData;

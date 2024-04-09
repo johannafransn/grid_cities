@@ -1,11 +1,10 @@
 import axios from "axios";
 
 const ApiService = {
-    getWeatherData: async function (lng: number, lat: number) {
-        console.log(process.env.NEXT_PUBLIC_OPEN_WEATHER_API_KEY, 'APIKEY')
-        const { data } = await axios.get(`https://api.openweathermap.org/data/2.5/onecall?lon=${lng}&lat=${lat}&units=metric&APPID=${process.env.NEXT_PUBLIC_OPEN_WEATHER_API_KEY}`);
-        console.log(data, 'wats data????')
-        return data
+    getWeatherData: async function (cityName: string) {
+        const { data } = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&APPID=${process.env.NEXT_PUBLIC_OPEN_WEATHER_API_KEY}`);
+        const main = data.main
+        return { ...main, type: data.weather[0].main }
     },
 
 
