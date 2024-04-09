@@ -113,22 +113,26 @@ const Grid = () => {
 
         <div className="flex flex-col space-y-4 p-2">
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-            {filteredAndSortedCities?.map((city: TCity, index: number) => (
-              <div
-                onClick={() => handleNavigateCity(city.name)}
-                key={index}
-                className="h-auto max-w-full rounded-lg text-grey p-3 bg-zinc-300"
-              >
-                <img
-                  className="h-auto max-w-full rounded-lg mb-2"
-                  src={city.image}
-                  alt={city.name}
-                />{" "}
-                <h4 className="text-l font-semibold">{city.name}</h4>
-                <p className="text-xs font-bold">{city.country}</p>
-                <p className="text-xs">{city.description}</p>
-              </div>
-            ))}
+            {filteredAndSortedCities.length ? (
+              filteredAndSortedCities.map((city: TCity, index: number) => (
+                <div
+                  onClick={() => handleNavigateCity(city.name)}
+                  key={index}
+                  className="h-auto max-w-full rounded-lg text-grey p-3 bg-zinc-300"
+                >
+                  <img
+                    className="h-auto max-w-full rounded-lg mb-2"
+                    src={city.image}
+                    alt={city.name}
+                  />
+                  <h4 className="text-l font-semibold">{city.name}</h4>
+                  <p className="text-xs font-bold">{city.country}</p>
+                  <p className="text-xs">{city.description}</p>
+                </div>
+              ))
+            ) : (
+              <p>No results found...</p>
+            )}
           </div>
         </div>
       </div>

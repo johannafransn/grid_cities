@@ -1,3 +1,5 @@
+//TODO: make use of a better algo to calculate distance this might not be 100% accurate
+//Calculates the distance between 2 lat/long coordinates
 export const calculateDistance = (
     { lat: lat1, lng: lon1 }: { lat: number; lng: number },
     { lat: lat2, lng: lon2 }: { lat: number; lng: number }

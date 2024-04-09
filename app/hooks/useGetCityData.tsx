@@ -2,12 +2,11 @@ import cities from "@/config/cities";
 import { useParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import ApiService from "../ApiService";
-import { TCity } from "../types/types";
+import { TCity, TWeather } from "../types/types";
 
 export function useGetCityData() {
   const [city, setCity] = useState<TCity | null>(null);
-  const [weather, setWeather] = useState<any | null>(null);
-
+  const [weather, setWeather] = useState<TWeather | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   let { id: cityName } = useParams();
 

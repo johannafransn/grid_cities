@@ -7,10 +7,12 @@ const useFilteredAndSortedCities = (
   sortBy: string,
   selectedCity: string
 ) => {
+  //get whole city object from city name
   const selectedCityMatch = useMemo(() => {
     return cities.cities.find((city) => city.name === selectedCity);
   }, [selectedCity]);
 
+  //filter cities by search for country or city name
   const filteredAndSortedCities = useMemo(() => {
     let sortedList = [...cities.cities];
     if (searchText) {
@@ -22,6 +24,7 @@ const useFilteredAndSortedCities = (
         );
       });
     }
+    //sort by name alphabetically or sort by distance from selected city
     if (sortBy === "name") {
       sortedList.sort((a, b) => a.name.localeCompare(b.name));
     } else if (sortBy === "distance" && selectedCityMatch) {
