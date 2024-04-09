@@ -27,11 +27,7 @@ const Sort: React.FC<SortProps> = ({
   };
   return (
     <div className="flex flex-row space-x-4">
-      <select
-        value={sortBy}
-        defaultValue={sortBy}
-        onChange={handleSortByChange}
-      >
+      <select value={sortBy} onChange={handleSortByChange}>
         {sortOptions.map((option, index) => (
           <option key={index} value={option}>
             Sort by {option}

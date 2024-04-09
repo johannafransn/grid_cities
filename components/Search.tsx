@@ -1,5 +1,5 @@
 "use client";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { ChangeEvent } from "react";
 
 type SearchProps = {
@@ -9,11 +9,15 @@ type SearchProps = {
 export const Search = (props: SearchProps) => {
   const { searchText, setSearchText } = props;
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchText(e.target.value);
     const queryParams = {
       searchText: e.target.value,
+      tempUnit: searchParams.get("tempUnit") || "",
+      sortBy: searchParams.get("sortBy") || "",
+      measureFrom: searchParams.get("measureFrom") || "",
     };
     //save the searchtext as URL so when clicking back btn search is saved and also URL can be shared
     router.push(`?${new URLSearchParams(queryParams).toString()}`);
